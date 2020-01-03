@@ -12,7 +12,7 @@ module.exports = function (ctx) {
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
     css: [
-      'app.scss'
+      'app.styl'
     ],
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
@@ -42,11 +42,21 @@ module.exports = function (ctx) {
       //            (not treeshaking Quasar; biggest bundle size; convenient)
       all: 'auto',
 
-      components: [],
+      // needed if not using auto-import,
+      // components: [
+      //   'QHeader',
+      //   'QFooter',
+      //   'QTabs',
+      //   'QTab',
+      //   'QRouteTab'
+      // ],
       directives: [],
 
       // Quasar plugins
-      plugins: []
+      plugins: [
+        'Notify',
+        'Dialog'
+      ]
     },
 
     // https://quasar.dev/quasar-cli/cli-documentation/supporting-ie
