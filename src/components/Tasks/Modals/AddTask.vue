@@ -1,50 +1,21 @@
 <template>
   <q-card>
 
-    <q-card-section class="row">
-      <div class="text-h6">Add Task</div>
-      <q-space />
-      <q-btn flat round dense v-close-popup icon="close" />
-    </q-card-section>
+    <modal-header>Add task</modal-header>
 
     <q-form @submit="submitForm">
 
       <q-card-section>
 
         <!-- Task name -->
-        <div class="row q-mb-sm">
-          <q-input
-            label="Task name"
-            ref="name"
-            class="col"
-            v-model="taskToSubmit.name"
-            :rules="[val => !!val || 'Task name is required']"
-            outlined
-            autofocus
-            clearable
-            />
-        </div>
+        <modal-task-name
+          :name.sync="taskToSubmit.name"
+          />
 
         <!-- Due Date -->
-        <div class="row q-mb-sm">
-          <q-input
-            label="Due date"
-            v-model="taskToSubmit.dueDate"
-            outlined
-            clearable
-            >
-            <template v-slot:append>
-              <q-icon name="event" class="cursor-pointer">
-                <q-popup-proxy>
-                  <q-date
-                    v-model="taskToSubmit.dueDate"
-                    clearable
-                    />
-                </q-popup-proxy>
-              </q-icon>
-            </template>
-          </q-input>
-        </div>
+        <modal-due-date
+          :dueDate.sync="taskToSubmit.dueDate"
+          />
 
         <!-- Due time -->
         <div class="row q-mb-sm" v-if="taskToSubmit.dueDate">
@@ -72,6 +43,9 @@
           />
       </q-card-actions>
 
+      <pre>
+        {{ taskToSubmit }}
+      </pre>
     </q-form>
 
   </q-card>
@@ -79,6 +53,9 @@
 
 <script>
   import { mapActions } from 'vuex'
+  import ModalHeader from './shared/ModalHeader'
+  import ModalTaskName from './shared/ModalTaskName'
+  import ModalDueDate from './shared/ModalDueDate'
 
   export default {
     data() {
@@ -90,6 +67,11 @@
           completed: false,
         }
       }
+    },
+    components: {
+      ModalHeader,
+      ModalTaskName,
+      ModalDueDate
     },
     methods: {
       ...mapActions('tasks', ['addTask']),
