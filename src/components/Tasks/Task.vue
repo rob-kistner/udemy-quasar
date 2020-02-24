@@ -13,14 +13,14 @@
       <q-item-label :class="{ 'text-strikethrough' : task.completed }">{{ task.name }}</q-item-label>
     </q-item-section>
 
-    <q-item-section side middle>
+    <q-item-section v-if="task.dueDate" side middle>
       <div class="row">
         <div class="column q-mr-sm">
           <q-icon name="event" size="1.25rem" />
         </div>
         <div class="column">
           <q-item-label class="row justify-end" caption>{{ task.dueDate }}</q-item-label>
-          <q-item-label class="row justify-end" caption>
+          <q-item-label class="row justify-end" v-if="task.dueTime" caption>
             <small>{{ task.dueTime }}</small>
           </q-item-label>
         </div>

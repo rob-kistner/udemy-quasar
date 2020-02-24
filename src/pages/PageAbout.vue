@@ -1,6 +1,6 @@
 <template>
-  <q-page padding>
-    <h1>About</h1>
+  <q-page class="q-pa-lg">
+    <h2 class="q-mt-none">About</h2>
   </q-page>
 </template>
 
